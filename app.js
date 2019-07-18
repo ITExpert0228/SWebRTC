@@ -11,11 +11,14 @@ app.get('/', function(req, res) {
 })
 
 app.post('/api/msg',function(req,res){
-    var txt=req.body.message;
+    var txt=req.body;
     console.log(txt);
-    res.send(txt+" - 'server edited'");
+    var resJson = {
+        url: "https://rogerscott.com"
+    }
+    res.send(resJson);
 });
 
-app.listen(5000,function(){
-    console.log("Started on PORT 5000");
+app.listen(3000,function(){
+    console.log("Started on PORT 3000");
 })

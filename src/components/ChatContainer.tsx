@@ -179,7 +179,10 @@ const ChatContainer: React.SFC<Props> = ({
         rtt={sendRtt}
         placeholder="Send a message..."
       />
-          
+      <label style={{ display: 'block' }}>
+        <input type="checkbox" checked={sendRtt} onChange={toggleRtt} />
+        Send as I type
+      </label> 
       <ComposersContainer>
         <ChatComposers room={roomAddress} />
       </ComposersContainer>

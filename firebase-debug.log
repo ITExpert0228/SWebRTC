@@ -1,0 +1,45 @@
+[debug] [2019-07-15T17:58:54.216Z] ----------------------------------------------------------------------
+[debug] [2019-07-15T17:58:54.218Z] Command:       C:\Program Files\nodejs\node.exe C:\Users\Silver\AppData\Roaming\npm\node_modules\firebase-tools\lib\bin\firebase.js init hosting
+[debug] [2019-07-15T17:58:54.219Z] CLI Version:   7.1.0
+[debug] [2019-07-15T17:58:54.219Z] Platform:      win32
+[debug] [2019-07-15T17:58:54.219Z] Node Version:  v10.16.0
+[debug] [2019-07-15T17:58:54.220Z] Time:          Mon Jul 15 2019 20:58:54 GMT+0300 (Eastern European Summer Time)
+[debug] [2019-07-15T17:58:54.220Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2019-07-15T17:58:54.225Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2019-07-15T17:58:54.226Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  F:\Alan\Sim
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2019-07-15T17:58:58.025Z] >>> HTTP REQUEST GET https://firebase.googleapis.com/v1beta1/projects?page_size=100  
+ 
+[debug] [2019-07-15T17:58:59.178Z] <<< HTTP RESPONSE 200
+[info] i  Using project bluesrtc (simplertc)
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 
+[debug] [2019-07-15T17:59:12.735Z] Error: kill ENOSYS
+    at process.kill (internal/process/per_thread.js:198:13)
+    at process.listener (C:\Users\Silver\AppData\Roaming\npm\node_modules\firebase-tools\node_modules\signal-exit\index.js:95:15)
+    at process.emit (events.js:198:13)
+[error] 
+[error] Error: An unexpected error has occurred.

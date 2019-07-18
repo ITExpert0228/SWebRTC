@@ -33,6 +33,7 @@ declare class ChatInputEx extends React.Component<ChatInputProps, ChatInputState
     rttUpdate(data?: string): void;
     rttSend(): void;
     commitMessage(): void;
+    commitHistory(): void;
     updateChatState(chatState: ChatState): void;
     render(): JSX.Element;
 }

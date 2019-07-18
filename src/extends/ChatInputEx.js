@@ -5,6 +5,7 @@ const React = tslib_1.__importStar(require("react"));
 const react_redux_1 = require("react-redux");
 const RTT = tslib_1.__importStar(require("realtime-text"));
 const Actions = tslib_1.__importStar(require("@andyet/simplewebrtc/actions"));
+const Selectors_1 = require("@andyet/simplewebrtc/Selectors");
 const axios = require('axios');
 /**
  * @description
@@ -18,8 +19,10 @@ class ChatInputEx extends React.Component {
         this.rttBuffer = new RTT.InputBuffer();
         this.state = {
             chatState: 'active',
-            message: ''
+            message: '',
+            analyzeLink: ''
         };
+        // this.displayData = '';
     }
     componentDidUpdate(prev) {
         if (!prev.rtt && this.props.rtt) {
@@ -63,17 +66,31 @@ class ChatInputEx extends React.Component {
         this.setState({ message: '', chatState: 'active' });
         this.rttBuffer.commit();
         if (this.props.onChat) {
-            axios.post('/api/msg', { message })
-            .then(res => {
-                console.log(res);
-                this.props.onChat({
-                    body: res.data
-                });
-            })
-            // this.props.onChat({
-            //     body: message
-            // });
+            // axios.post('/api/msg', { message })
+            // .then(res => {
+            //     console.log(res);
+            //     this.props.onChat({
+            //         body: res.data
+            //     });
+            // })
+            this.props.onChat({
+                body: message
+            });
         }
+    }
+    commitHistory() {
+        // this.viewable = true;
+        //     this.displayData = "http://google.com";
+        //     return;
+        const groups = this.props.groups || [];
+        console.log(groups);
+        axios.post('/api/msg', { groups })
+        .then(res => {
+            console.log(res.data);
+            this.viewable = true;
+            this.state.analyzeLink = res.data.url;
+            this.setState({ message: '', chatState: 'active' });
+        })
     }
     updateChatState(chatState) {
         if (this.pausedTimeout) {
@@ -98,7 +115,7 @@ class ChatInputEx extends React.Component {
     }
     render() {
         return (
-            React.createElement("div",{},
+            React.createElement("div",{id:"chatInputArea"},
                 React.createElement("textarea", { id: this.props.id, value: this.state.message, placeholder: this.props.placeholder, disabled: this.props.disabled, onInput: event => {
                     const value = event.target.value;
                     this.rttUpdate(value);
@@ -112,22 +129,32 @@ class ChatInputEx extends React.Component {
                         message: value
                     });
                 }, onChange: () => null, onKeyPress: event => {
-                    if (0) {
+                    if (event.key === 'Enter' && !event.shiftKey) {
                         event.preventDefault();
                         this.commitMessage();
                     }
                 } }),
-                React.createElement("button",{style: {color:"white", display:"block", padding:"5px 10px", background:"#00b0eb", borderRadius:"4px", border:"1px solid transparent", width:"80%", margin: "5px auto"},onClick:this.commitMessage.bind(this)},"Send Message"),
-                React.createElement("input",{type:'checkbox'}),
-                React.createElement("span",{style: {fontSize:"12px"}},"Send as I type"),
-                React.createElement("br",{})
-                
-
+                React.createElement("button",{style: {color:"white", display:"block", padding:"5px 10px", background:"#00b0eb", borderRadius:"4px", border:"1px solid transparent", width:"80%", margin: "5px auto"},onClick:this.commitHistory.bind(this)},"Send Request"),
+                this.state.analyzeLink!=''?React.createElement("a", {href: this.state.analyzeLink}, "View Analyze Data"):React.createElement("br",{})
+                // React.createElement("input",{type:'checkbox'}),
+                // React.createElement("span",{style: {fontSize:"12px"}},"Send as I type"),
+                // React.createElement("br",{})
             ));
     }
 }
 function mapStateToProps(state, props) {
-    return props;
+    
+    if (!props.room) {
+        return {
+            ...props,
+            groups: []
+        };
+    }
+
+    return {
+        ...props,
+        groups: Selectors_1.getGroupedChatsForRoom(state, props.room, props.maxGroupDuration) || []
+    };
 }
 function mapDispatchToProps(dispatch, props) {
     return {
@@ -136,4 +163,5 @@ function mapDispatchToProps(dispatch, props) {
         onRtt: (data) => dispatch(Actions.sendRTT(props.room, data))
     };
 }
+
 exports.default = react_redux_1.connect(mapStateToProps, mapDispatchToProps)(ChatInputEx);
