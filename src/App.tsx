@@ -9,6 +9,11 @@ import { colorToString, darken } from './utils/colorify';
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
   background-color: ${({ theme }) => colorToString(theme.background)};
   color: ${({ theme }) => colorToString(theme.foreground)};
   a {

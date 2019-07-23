@@ -1,7 +1,7 @@
 import {
   Chat,
   ChatComposers,
-//  ChatInput,
+  ChatInput,
   ChatList,
   Peer,
   StayDownContainer
@@ -165,6 +165,10 @@ const ChatContainer: React.SFC<Props> = ({
       <KeyboardArrowDownIcon />
       <span>Chat</span>
     </Header>
+    <ChatInputEx
+        room={roomAddress}
+        rtt={sendRtt}
+    />
     <StyledStayDownContainer>
       <ChatList
         room={roomAddress}
@@ -174,18 +178,11 @@ const ChatContainer: React.SFC<Props> = ({
       />
     </StyledStayDownContainer>
     <InputContainer>
-      <ChatInputEx
+      <ChatInput
         room={roomAddress}
         rtt={sendRtt}
         placeholder="Send a message..."
       />
-      <label style={{ display: 'block' }}>
-        <input type="checkbox" checked={sendRtt} onChange={toggleRtt} />
-        Send as I type
-      </label> 
-      <ComposersContainer>
-        <ChatComposers room={roomAddress} />
-      </ComposersContainer>
     </InputContainer>
   </Container>
 );

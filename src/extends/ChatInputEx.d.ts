@@ -7,7 +7,6 @@ export interface ChatInputProps {
     id?: string;
     disabled?: boolean;
     rtt?: boolean;
-    placeholder?: string;
     onChat?: (opts: Actions.ChatOptions) => void;
     onChatState?: (state: ChatState) => void;
     onRtt?: (data: RTT.RTTEvent) => void;

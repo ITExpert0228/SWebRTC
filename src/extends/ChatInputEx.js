@@ -115,27 +115,10 @@ class ChatInputEx extends React.Component {
     }
     render() {
         return (
-            React.createElement("div",{id:"chatInputArea"},
-                React.createElement("textarea", { id: this.props.id, value: this.state.message, placeholder: this.props.placeholder, disabled: this.props.disabled, onInput: event => {
-                    const value = event.target.value;
-                    this.rttUpdate(value);
-                    if (value !== '') {
-                        this.updateChatState('composing');
-                    }
-                    if (this.state.message !== '' && value === '') {
-                        this.updateChatState('active');
-                    }
-                    this.setState({
-                        message: value
-                    });
-                }, onChange: () => null, onKeyPress: event => {
-                    if (event.key === 'Enter' && !event.shiftKey) {
-                        event.preventDefault();
-                        this.commitMessage();
-                    }
-                } }),
-                React.createElement("button",{style: {color:"white", display:"block", padding:"5px 10px", background:"#00b0eb", borderRadius:"4px", border:"1px solid transparent", width:"80%", margin: "5px auto"},onClick:this.commitHistory.bind(this)},"Send Request"),
-                this.state.analyzeLink!=''?React.createElement("a", {href: this.state.analyzeLink}, "View Analyze Data"):React.createElement("br",{})
+            React.createElement("div",{id:"chatInputArea", style:{borderBottom:"1px solid #ccc"}},
+                React.createElement("p",{style: {color:"#555", display:"block", padding:"5px 10px 0", margin: "5px auto"}},"View Server Analyze:"),
+                React.createElement("button",{style: {color:"white", display:"block", padding:"5px 10px", background:"#00b0eb", borderRadius:"4px", border:"1px solid transparent", width:"90%", margin: "5px auto"},onClick:this.commitHistory.bind(this)},"Send Request"),
+                this.state.analyzeLink!=''?React.createElement("a", {href: this.state.analyzeLink}, "View Analyze Data"):React.createElement("span",{})
                 // React.createElement("input",{type:'checkbox'}),
                 // React.createElement("span",{style: {fontSize:"12px"}},"Send as I type"),
                 // React.createElement("br",{})

@@ -12,6 +12,7 @@ const EXTENSION_ID =
 
 const Button = styled(TalkyButton)({
   display: 'none',
+  gridArea: 'share',
   [mq.SMALL_DESKTOP]: {
     display: 'block'
   }

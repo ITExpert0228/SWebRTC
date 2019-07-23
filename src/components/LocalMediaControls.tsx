@@ -27,6 +27,8 @@ const pulseKeyFrames = keyframes`
 
 const MuteButton = styled(TalkyButton)<MutePauseButtonProps>`
   background-color: ${props => (props.isOff ? '#e60045' : '')};
+  color: ${props => (props.isOff ? '#fff' : '')};
+  grid-area: mic;
   &:not(:hover) svg {
     fill: ${props => (props.isOff ? 'white' : '')};
   }
@@ -44,14 +46,23 @@ const MuteButton = styled(TalkyButton)<MutePauseButtonProps>`
 
 const PauseButton = styled(TalkyButton)(({ isOff }: MutePauseButtonProps) => ({
   backgroundColor: isOff ? '#e60045' : '',
+  color: isOff ? '#fff' : '',
+  gridArea: 'video',
   '& svg': {
     fill: isOff ? 'white' : ''
   }
 }));
 
 const Container = styled.div({
-  display: 'flex',
   marginBottom: '10px',
+  display: 'grid',
+  gridTemplateAreas: `
+    'mic mic'
+    'video video'
+    'share share'
+  `,
+  gridColumnGap: '10px',
+  gridRowGap: '10px',
   [mq.MOBILE]: {
     '& button': {
       flex: 1,
@@ -94,12 +105,14 @@ const LocalMediaControls: React.SFC<LocalMediaControlsProps> = ({
       onClick={() => (isMuted ? unmute() : mute())}
     >
       {isMuted ? <MicOffIcon /> : <MicIcon />}
+      <span>My microphone</span>
     </MuteButton>
     <PauseButton
       isOff={isPaused}
       onClick={() => (isPaused ? resumeVideo() : pauseVideo())}
     >
       {isPaused ? <VideocamOffIcon /> : <VideocamIcon />}
+      <span>&nbsp;&nbsp;&nbsp;My camera</span>
     </PauseButton>
     <ScreenshareControls />
   </Container>
