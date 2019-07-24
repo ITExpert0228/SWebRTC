@@ -15,6 +15,7 @@ const StyledGridLayout = styled(GridLayout)({
   flex: 1,
   backgroundColor: '#eaecec',
   maxHeight: '100vh',
+  height: '100vh',
   '& video': {
     width: '100%'
   },

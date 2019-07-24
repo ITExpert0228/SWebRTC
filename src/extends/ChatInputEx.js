@@ -118,7 +118,7 @@ class ChatInputEx extends React.Component {
             React.createElement("div",{id:"chatInputArea", style:{borderBottom:"1px solid #ccc"}},
                 React.createElement("p",{style: {color:"#555", display:"block", padding:"5px 10px 0", margin: "5px auto"}},"View Server Analyze:"),
                 React.createElement("button",{style: {color:"white", display:"block", padding:"5px 10px", background:"#00b0eb", borderRadius:"4px", border:"1px solid transparent", width:"90%", margin: "5px auto"},onClick:this.commitHistory.bind(this)},"Send Request"),
-                this.state.analyzeLink!=''?React.createElement("a", {href: this.state.analyzeLink}, "View Analyze Data"):React.createElement("span",{})
+                this.state.analyzeLink!=''?React.createElement("a", {href: this.state.analyzeLink, target: "_blank"}, "View Analyze Data"):React.createElement("span",{})
                 // React.createElement("input",{type:'checkbox'}),
                 // React.createElement("span",{style: {fontSize:"12px"}},"Send as I type"),
                 // React.createElement("br",{})

@@ -21,6 +21,8 @@ import SimpleWebRTCBanner from '../components/SimpleWebRTCBanner';
 import SoundPlayer from '../components/SoundPlayer';
 import HiddenPeers from '../contexts/HiddenPeers';
 import mq from '../styles/media-queries';
+import SplitterLayout from 'react-splitter-layout';
+import 'react-splitter-layout/lib/index.css';
 
 const PasswordEntryContainer = styled.div({
   display: 'flex',
@@ -44,6 +46,12 @@ const Container = styled.div({
   [mq.SMALL_DESKTOP]: {
     flexDirection: 'row'
   }
+});
+
+const SplitContainer = styled.div({
+  height: '100vh',
+  width: '100vw',
+  position: 'relative'
 });
 
 const LoadingState = styled.div({
@@ -155,20 +163,40 @@ class Index extends Component<Props, State> {
                                   passwordRequired={room.passwordRequired}
                                   roomId={room.id!}
                                 />
-                                <PeerGrid
-                                  roomAddress={room.address!}
-                                  activeSpeakerView={
-                                    this.state.activeSpeakerView
-                                  }
-                                />
+
+                                <SplitContainer>
                                 {this.state.chatOpen ? (
-                                  <ChatContainer
+                                  <SplitterLayout
+                                    secondaryInitialSize={200}
+                                  >
+                                  <PeerGrid
                                     roomAddress={room.address!}
-                                    sendRtt={this.state.sendRtt}
-                                    toggleRtt={this.toggleRtt}
-                                    toggleChat={this.toggleChat}
+                                    activeSpeakerView={
+                                      this.state.activeSpeakerView
+                                    }
                                   />
-                                ) : (
+                                  <ChatContainer
+                                      roomAddress={room.address!}
+                                      sendRtt={this.state.sendRtt}
+                                      toggleRtt={this.toggleRtt}
+                                      toggleChat={this.toggleChat}
+                                    />
+                                  </SplitterLayout>
+                                ):(
+                                  <SplitterLayout
+                                    secondaryInitialSize={200}
+                                  >
+                                  <PeerGrid
+                                    roomAddress={room.address!}
+                                    activeSpeakerView={
+                                      this.state.activeSpeakerView
+                                    }
+                                  />
+                                  </SplitterLayout>
+                                )}
+                                  
+                                </SplitContainer>
+                                {this.state.chatOpen ? '' : (
                                   <ChatToggle
                                     roomAddress={room.address!}
                                     onClick={this.toggleChat}

@@ -25,7 +25,8 @@ const Container = styled.div`
   background-color: ${({ theme }) => colorToString(theme.background)};
   overflow: hidden;
   ${mq.SMALL_DESKTOP} {
-    width: 200px;
+    width: 100%;
+    height:100%;
     border-top: none;
     border-left: ${({ theme }) =>
       css`1px solid ${colorToString(theme.border)}`};
