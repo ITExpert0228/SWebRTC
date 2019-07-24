@@ -19,6 +19,21 @@ module.exports = {
       {
         test: /\.tsx?$/,
         loader: 'awesome-typescript-loader'
+      },
+      {
+        test: /\.css$/,
+        exclude: /node_moduels/,
+        use: [
+          // style-loader
+          { loader: 'style-loader' },
+          // css-loader
+          {
+            loader: 'css-loader',
+            options: {
+              modules: true
+            }
+          }
+        ]
       }
     ]
   },
