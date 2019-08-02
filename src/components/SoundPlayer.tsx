@@ -72,7 +72,8 @@ const SoundPlayer: React.SFC<Props> = ({ roomAddress }) => (
     
   <UserControls
     render={({
-      mute
+      mute,
+      pauseVideo,
     }) => (
       <>
         <PeerList
@@ -83,6 +84,7 @@ const SoundPlayer: React.SFC<Props> = ({ roomAddress }) => (
               onPeerEnter={throttledPeerEnter}
               onPeerExit={throttledPeerExit}
               onPeerEmpty={mute}
+              onPeerPause={pauseVideo}
             />
           )}
         />
