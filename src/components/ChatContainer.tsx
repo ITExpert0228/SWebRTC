@@ -6,7 +6,7 @@ import {
   Peer,
   StayDownContainer
 } from '@andyet/simplewebrtc';
-import ChatInputEx from '../extends/ChatInputEx';
+import ChatAnalyzeEx from '../extends/ChatAnalyzeEx';
 import KeyboardArrowDownIcon from 'material-icons-svg/components/baseline/KeyboardArrowDown';
 import React from 'react';
 import styled, { css } from 'styled-components';
@@ -166,7 +166,7 @@ const ChatContainer: React.SFC<Props> = ({
       <KeyboardArrowDownIcon />
       <span>Chat</span>
     </Header>
-    <ChatInputEx
+    <ChatAnalyzeEx
         room={roomAddress}
         rtt={sendRtt}
     />

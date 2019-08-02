@@ -1,6 +1,6 @@
 import React from 'react';
 
-const re = /((?:(?:https|http):\/\/)?(?:[a-z0-9.]*\.[a-z]+))/gi;
+const re = /(https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|www\.[a-zA-Z0-9][a-zA-Z0-9-]+[a-zA-Z0-9]\.[^\s]{2,}|https?:\/\/(?:www\.|(?!www))[a-zA-Z0-9]+\.[^\s]{2,}|www\.[a-zA-Z0-9]+\.[^\s]{2,})/gi;
 
 function getUrls(text: string) {
   const matches = [];
