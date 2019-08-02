@@ -1,4 +1,4 @@
-import { ChatList, PeerList } from '@andyet/simplewebrtc';
+import { ChatList, PeerList, UserControls } from '@andyet/simplewebrtc';
 import { throttle } from 'lodash-es';
 import React from 'react';
 import getConfigFromMetaTag from '../utils/metaConfig';
@@ -26,6 +26,17 @@ function peerExit() {
   }
 }
 const throttledPeerExit = throttle(peerExit, DEBOUNCE_INTERVAL, {
+  trailing: false
+});
+
+function peerEmpty() {
+  if (peerExitSound !== null) {
+    peerExitSound.play();
+  }
+  console.log('empty -----------------------');
+}
+
+const throttledPeerEmpty = throttle(peerEmpty, DEBOUNCE_INTERVAL, {
   trailing: false
 });
 
@@ -58,28 +69,36 @@ interface Props {
 }
 
 const SoundPlayer: React.SFC<Props> = ({ roomAddress }) => (
-  <>
-    <PeerList
-      room={roomAddress}
-      render={({ peers }) => (
-        <PeerNotifications
-          peers={peers}
-          onPeerEnter={throttledPeerEnter}
-          onPeerExit={throttledPeerExit}
+    
+  <UserControls
+    render={({
+      mute
+    }) => (
+      <>
+        <PeerList
+          room={roomAddress}
+          render={({ peers }) => (
+            <PeerNotifications
+              peers={peers}
+              onPeerEnter={throttledPeerEnter}
+              onPeerExit={throttledPeerExit}
+              onPeerEmpty={mute}
+            />
+          )}
         />
-      )}
-    />
-    <ChatList
-      room={roomAddress}
-      render={({ groups }) => (
-        <ChatNotifications
-          groups={groups}
-          onSend={throttledSend}
-          onReceive={throttledReceive}
+        <ChatList
+          room={roomAddress}
+          render={({ groups }) => (
+            <ChatNotifications
+              groups={groups}
+              onSend={throttledSend}
+              onReceive={throttledReceive}
+            />
+          )}
         />
-      )}
-    />
-  </>
+      </>
+    )}
+  />
 );
 
 export default SoundPlayer;

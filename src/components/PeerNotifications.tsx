@@ -14,6 +14,7 @@ interface Props {
   peers: Peer[];
   onPeerEnter: () => void;
   onPeerExit: () => void;
+  onPeerEmpty: () => void;
 }
 
 export default class PeerNotifications extends Component<Props> {
@@ -21,7 +22,11 @@ export default class PeerNotifications extends Component<Props> {
     if (this.props.peers.length > prevProps.peers.length) {
       this.props.onPeerEnter();
     } else if (this.props.peers.length < prevProps.peers.length) {
-      this.props.onPeerExit();
+      console.log('exit-----------', prevProps.peers.length, this.props.peers.length);
+      if (this.props.peers.length == 0) 
+        this.props.onPeerEmpty();
+      else
+        this.props.onPeerExit();
     }
   }
 
